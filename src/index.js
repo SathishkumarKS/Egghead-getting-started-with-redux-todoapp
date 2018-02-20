@@ -1,5 +1,5 @@
 import { createStore, combineReducers } from "redux";
-import { Provider, connect } from "react-redux"
+import { Provider, connect } from "react-redux";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
@@ -50,7 +50,7 @@ const todoApp = combineReducers({
   todos: todos,
   visibilityFilter: visibilityFilter
 });
-// React setup end
+// Redux setup end
 
 //Action Creators
 let nextId = 0;
@@ -59,6 +59,12 @@ const addTodo = todoText => {
 };
 const toggleTodo = id => {
   return { type: "TOGGLE_TODO", id };
+};
+const setVisibilityFilter = filter => {
+  return {
+    type: "SET_VISIBILITY_FILTER",
+    filter: filter
+  };
 };
 
 // React components begin
@@ -71,13 +77,6 @@ const getVisibleTodos = (todos, filter) => {
     case "COMPLETED":
       return todos.filter(todo => todo.completed);
   }
-};
-
-const setVisibilityFilter = filter => {
-  return {
-    type: "SET_VISIBILITY_FILTER",
-    filter: filter
-  };
 };
 
 let AddTodo = ({ dispatch }) => {
